@@ -6,19 +6,7 @@ dotenv.config();
 
 const app = express();
 
-// CORS configuration
-const corsOptions = {
-  origin: ['*'],
-  methods: ['*'],
-  allowedHeaders: ['*']
-};
-
-// Apply CORS to all routes
-app.use(cors(corsOptions));
-
-// Handle preflight requests
-app.options('*', cors(corsOptions));
-
+app.use(cors())
 app.use(express.json());
 
 // Endpoint básico
