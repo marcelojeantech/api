@@ -11,7 +11,8 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://localhost:5173',
-    'https://quick-win-finance-flow.vercel.app'
+    'https://quick-win-finance-flow.vercel.app',
+    'https://quick-win-finance-flow-git-main-marcelojean10s-projects.vercel.app/'
   ],
   credentials: true,
   optionsSuccessStatus: 200,
