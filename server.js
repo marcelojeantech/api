@@ -19,7 +19,22 @@ app.get('/api/omie/receivables', cors(), async (req, res) => {
     const pagina = parseInt(req.query.pagina) || 1;
     const registros_por_pagina = parseInt(req.query.registros_por_pagina) || 500;
 
-    const response = await axios.get('https://api-r4b9.onrender.com/api/omie/receivables');
+    const response = await axios.post('https://app.omie.com.br/api/v1/financas/contareceber/', {
+      call: 'ListarContasReceber',
+      app_key: process.env.OMIE_APP_KEY,
+      app_secret: process.env.OMIE_APP_SECRET,
+      param: [
+        {
+          pagina,
+          registros_por_pagina,
+          apenas_importado_api: 'N'
+        }
+      ]
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
     res.json(response.data);
   } catch (error) {
