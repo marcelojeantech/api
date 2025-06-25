@@ -8,16 +8,9 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://quick-win-finance-flow.vercel.app',
-    'https://quick-win-finance-flow-git-main-marcelojean10s-projects.vercel.app/'
-  ],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With']
+  origin: ['*'],
+  methods: ['*'],
+  allowedHeaders: ['*']
 };
 
 // Apply CORS to all routes
