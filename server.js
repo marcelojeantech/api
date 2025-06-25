@@ -5,6 +5,26 @@ const cors = require('cors');
 dotenv.config();
 
 const app = express();
+
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://quick-win-finance-flow.vercel.app'
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With']
+};
+
+// Apply CORS to all routes
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
 app.use(express.json());
 
 // Endpoint básico
@@ -13,7 +33,7 @@ app.get('/api/hello', (req, res) => {
 });
 
 // Endpoint GET para consultar contas a receber da Omie com paginação
-app.get('/api/omie/receivables', cors(), async (req, res) => {
+app.get('/api/omie/receivables', async (req, res) => {
   try {
     // Captura os parâmetros da query string ou usa valores padrão
     const pagina = parseInt(req.query.pagina) || 1;
@@ -43,8 +63,8 @@ app.get('/api/omie/receivables', cors(), async (req, res) => {
   }
 });
 
-// Inicia o servidor na porta 3000
-const PORT = process.env.PORT || 3000;
+// Inicia o servidor na porta 3001 (para não conflitar com o frontend)
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
